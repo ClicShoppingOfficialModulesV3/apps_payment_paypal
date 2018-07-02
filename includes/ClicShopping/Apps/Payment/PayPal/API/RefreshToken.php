@@ -1,0 +1,36 @@
+<?php
+  /**
+   *
+   * @copyright Copyright 2008 - http://www.innov-concept.com
+   * @Brand : ClicShopping(Tm) at Inpi all right Reserved
+   * @license GPL 2 License & MIT Licencse
+
+   */
+
+namespace ClicShopping\Apps\Payment\PayPal\API;
+
+class RefreshToken extends \ClicShopping\Apps\Payment\PayPal\APIAbstract
+{
+    protected $type = 'login';
+
+    public function execute(array $extra_params = null)
+    {
+        $params = [
+            'client_id' => (CLICSHOPPING_APP_PAYPAL_LOGIN_STATUS == '1') ? CLICSHOPPING_APP_PAYPAL_LOGIN_LIVE_CLIENT_ID : CLICSHOPPING_APP_PAYPAL_LOGIN_SANDBOX_CLIENT_ID,
+            'client_secret' => (CLICSHOPPING_APP_PAYPAL_LOGIN_STATUS == '1') ? CLICSHOPPING_APP_PAYPAL_LOGIN_LIVE_SECRET : CLICSHOPPING_APP_PAYPAL_LOGIN_SANDBOX_SECRET,
+            'grant_type' => 'refresh_token'
+        ];
+
+        if (!empty($extra_params)) {
+            $params = array_merge($params, $extra_params);
+        }
+
+        $response = $this->getResult($params);
+
+        return [
+            'res' => $response,
+            'success' => (is_array($response) && !isset($response['error'])),
+            'req' => $params
+        ];
+    }
+}
