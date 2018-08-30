@@ -25,6 +25,8 @@ button_dialog_delete = Delete
 button_back = Back
 button_delete = Delete
 button_cancel = Cancel
+button_delete_menu = Delete menu
+button_sort_order = Payal sort order
 
 app_link_info = Info/Help
 app_link_privacy = Privacy

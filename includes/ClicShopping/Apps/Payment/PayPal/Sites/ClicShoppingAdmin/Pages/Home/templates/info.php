@@ -1,4 +1,14 @@
 <?php
+/**
+ *
+ *  @copyright 2008 - https://www.clicshopping.org
+ *  @Brand : ClicShopping(Tm) at Inpi all right Reserved
+ *  @Licence GPL 2 & MIT
+ *  @licence MIT - Portion of osCommerce 2.4
+ *
+ *
+ */
+
 use ClicShopping\OM\HTML;
 
 require(__DIR__ . '/template_top.php');
@@ -14,7 +24,7 @@ require(__DIR__ . '/template_top.php');
       <p class="card-text">
 <?php echo
   $CLICSHOPPING_PayPal->getDef('online_forum_body', [
-    'button_online_forum' => HTML::button($CLICSHOPPING_PayPal->getDef('button_online_forum'), null, 'https://clicshopping.org/', 'info', ['newwindow' => 'blank'])
+    'button_online_forum' => HTML::button($CLICSHOPPING_PayPal->getDef('button_online_forum'), null, 'https://www.clicshopping.org/', 'info', ['newwindow' => 'blank'])
   ]);
 ?>
         </p>

@@ -1,5 +1,15 @@
 <?php
-  use ClicShopping\OM\HTML;
+/**
+ *
+ *  @copyright 2008 - https://www.clicshopping.org
+ *  @Brand : ClicShopping(Tm) at Inpi all right Reserved
+ *  @Licence GPL 2 & MIT
+ *  @licence MIT - Portion of osCommerce 2.4
+ *
+ *
+ */
+
+use ClicShopping\OM\HTML;
   use ClicShopping\OM\CLICSHOPPING;
 
   require(__DIR__ . '/template_top.php');
@@ -58,7 +68,7 @@ if ($Qlog->getPageSetTotalRows() > 0) {
       <td><?php echo long2ip($Qlog->value('ip_address')); ?></td>
       <td><?php echo (!empty($customers_name)) ? HTML::outputProtected($customers_name) : '<i>' . $CLICSHOPPING_PayPal->getDef('guest') . '</i>'; ?></td>
       <td class="text-md-center"><?php echo date(CLICSHOPPING::getDef('php_date_time_format'), $Qlog->value('date_added')); ?></td>
-      <td class="text-md-center"><a href="<?php echo $CLICSHOPPING_PayPal->link('Log&View&page=' . (isset($_GET['page']) ? $_GET['page'] : 1) . '&lID=' . $Qlog->valueInt('id')); ?>"><?php echo HTML::image($CLICSHOPPING_Template->getImageDirectory() . '/icons/edit.gif', CLICSHOPPING::getDef('image_edit')); ?></a></td>
+      <td class="text-md-center"><a href="<?php echo $CLICSHOPPING_PayPal->link('Log&View&page=' . (isset($_GET['page']) ? $_GET['page'] : 1) . '&lID=' . $Qlog->valueInt('id')); ?>"><?php echo HTML::image($CLICSHOPPING_Template->getImageDirectory() . 'icons/edit.gif', CLICSHOPPING::getDef('image_edit')); ?></a></td>
     </tr>
 
 <?php

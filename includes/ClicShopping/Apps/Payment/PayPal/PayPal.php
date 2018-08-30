@@ -1,10 +1,12 @@
 <?php
 /**
- * PayPal.php
- * @copyright Copyright 2008 - http://www.innov-concept.com
- * @Brand : ClicShopping(Tm) at Inpi all right Reserved
- * @license GPL 2 License & MIT Licencse
-
+ *
+ *  @copyright 2008 - https://www.clicshopping.org
+ *  @Brand : ClicShopping(Tm) at Inpi all right Reserved
+ *  @Licence GPL 2 & MIT
+ *  @licence MIT - Portion of osCommerce 2.4 
+ *
+ *
  */
 
   namespace ClicShopping\Apps\Payment\PayPal;
@@ -159,7 +161,7 @@
       return Registry::get('PayPalAdminConfig' . $module)->$info;
     }
 
-    function hasCredentials($module, $type = null) {
+    public function hasCredentials($module, $type = null) {
 
       if (!defined('CLICSHOPPING_APP_PAYPAL_' . $module . '_STATUS')) {
         return false;
@@ -198,7 +200,7 @@
       return true;
     }
 
-    function getCredentials($module, $type) {
+    public function getCredentials($module, $type) {
 
       if ( constant('CLICSHOPPING_APP_PAYPAL_' . $module . '_STATUS') == '1') {
         if ( $type == 'email') {
@@ -223,7 +225,7 @@
       }
     }
 
-    function hasApiCredentials($server, $type = null) {
+    public function hasApiCredentials($server, $type = null) {
 
       $server = ($server == 'live') ? 'LIVE' : 'SANDBOX';
 
@@ -246,7 +248,7 @@
       return true;
     }
 
-    function getApiCredentials($server, $type) {
+    public function getApiCredentials($server, $type) {
       if ( ($server == 'live') && defined('CLICSHOPPING_APP_PAYPAL_LIVE_API_' . strtoupper($type)) ) {
         return constant('CLICSHOPPING_APP_PAYPAL_LIVE_API_' . strtoupper($type));
       } elseif ( defined('CLICSHOPPING_APP_PAYPAL_SANDBOX_API_' . strtoupper($type)) ) {
@@ -282,7 +284,7 @@
       return HTTP::getResponse($p);
     }
 
-    function formatCurrencyRaw($total, $currency_code = null, $currency_value = null) {
+    public function formatCurrencyRaw($total, $currency_code = null, $currency_value = null) {
       $CLICSHOPPING_Currencies = Registry::get('Currencies');
 
       if ( empty($currency_code) ) {
@@ -293,7 +295,7 @@
         $currency_value = $CLICSHOPPING_Currencies->currencies[$currency_code]['value'];
       }
 
-      return number_format(round($total * $currency_value, $CLICSHOPPING_Currencies->currencies[$currency_code]['decimal_places']), $CLICSHOPPING_Currencies->currencies[$currency_code]['decimal_places'], '.', '');
+      return number_format(round($total * $currency_value, 4), $CLICSHOPPING_Currencies->currencies[$currency_code]['decimal_places'], '.', '');
     }
 
     public function getApiVersion()  {
@@ -304,7 +306,7 @@
         return $this->identifier;
     }
 
-    function logUpdate($message, $version) {
+    public function logUpdate($message, $version) {
       if ( FileSystem::isWritable(CLICSHOPPING::BASE_DIR . 'Apps/Payment/PayPal/work') ) {
         file_put_contents(CLICSHOPPING::BASE_DIR . 'Apps/Payment/PayPal/work/update_log-' . $version . '.php', '[' . date('d-M-Y H:i:s') . '] ' . $message . "\n", FILE_APPEND);
       }

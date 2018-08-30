@@ -1,8 +1,8 @@
 {
 	"title":	"PayPal App",
-	"app":		"Paypal",
+	"app":		"PayPal",
 	"vendor":	"Payment",
-	"version":	"5.0.0",
+	"version":	"5.0.1",
 	"req_core_version":	"3.0",
 	"license":	"MIT",
 	"authors": [
@@ -26,8 +26,7 @@
 				"Page":		"Module\\Hooks\\ClicShoppingAdmin\\Orders\\PageTab"
 			},
 			"Shop/Account": {
-				"Logout":	"Module\\Hooks\\Shop\\Account\\Logout",
-        "CheckoutProcess": "Module\\Hooks\\Shop\\CheckoutProcess\\Odoo"
+				"Logout":	"Module\\Hooks\\Shop\\Account\\Logout"
 			}
 		}
 	},
