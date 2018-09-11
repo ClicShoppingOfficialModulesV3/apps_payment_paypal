@@ -17,7 +17,7 @@ namespace ClicShopping\Apps\Payment\PayPal\Module\Hooks\ClicShoppingAdmin\Orders
 
   use ClicShopping\Apps\Payment\PayPal\PayPal as PayPalApp;
 
-  class PageTab implements \ClicShopping\OM\Modules\HooksInterface {
+  class PageContentTab implements \ClicShopping\OM\Modules\HooksInterface {
     protected $app;
 
     public function __construct()  {
