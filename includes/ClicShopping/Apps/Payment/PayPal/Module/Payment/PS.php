@@ -788,7 +788,7 @@
       $CLICSHOPPING_Order = Registry::get('Order');
       $CLICSHOPPING_Address = Registry::get('Address');
       $CLICSHOPPING_Hooks = Registry::get('Hooks');
-      $CLICSHOPPING_ProdctsAttributes = Registry::get('ProdctsAttributes');
+      $CLICSHOPPING_ProductsAttributes = Registry::get('ProductsAttributes');
 
       $new_order_status = DEFAULT_ORDERS_STATUS_ID;
 
@@ -974,7 +974,7 @@
 
           for ($j=0, $n2=count($CLICSHOPPING_Order->products[$i]['attributes']); $j<$n2; $j++) {
 
-            $Qattributes = $CLICSHOPPING_ProdctsAttributes->getAttributesDownloaded($CLICSHOPPING_Order->products[$i]['id'], $CLICSHOPPING_Order->products[$i]['attributes'][$j]['option_id'], $CLICSHOPPING_Order->products[$i]['attributes'][$j]['value_id'], $this->app->lang->getId());
+            $Qattributes = $CLICSHOPPING_ProductsAttributes->getAttributesDownloaded($CLICSHOPPING_Order->products[$i]['id'], $CLICSHOPPING_Order->products[$i]['attributes'][$j]['option_id'], $CLICSHOPPING_Order->products[$i]['attributes'][$j]['value_id'], $this->app->lang->getId());
 
             $products_ordered_attributes .= "\n\t" . $Qattributes->value('products_options_name') . ' ' . $Qattributes->value('products_options_values_name');
           }
@@ -1023,16 +1023,26 @@
       $email_order .= CLICSHOPPING::getDef('email_text_payment_method') . "\n" .
       CLICSHOPPING::getDef('email_separator')  . "\n";
 
-      if (is_object($GLOBALS[$_SESSION['payment']])) {
-        $message_order = utf8_decode(stripslashes(CLICSHOPPING::getDef('email_text_payment_method')));
-        $email_order .= html_entity_decode($message_order) . "\n" .
-        CLICSHOPPING::getDef('email_separator') . "\n";
-        $payment_class = $GLOBALS[$_SESSION['payment']];
+      if (isset($_SESSION['payment'])) {
+        if (strpos($_SESSION['payment'], '\\') !== false) {
+          $code = 'Payment_' . str_replace('\\', '_', $_SESSION['payment']);
 
-        $email_order .= $payment_class->title . "\n\n";
+          if (Registry::exists($code)) {
+            $CLICSHOPPING_PM = Registry::get($code);
+          }
+        }
 
-        if (property_exists(get_class($payment_class),'email_footer')) {
-          $email_order .= $payment_class->email_footer;
+        if (isset($CLICSHOPPING_PM)) {
+          $message_order = utf8_decode(stripslashes(CLICSHOPPING::getDef('email_text_payment_method')));
+          $email_order .= html_entity_decode($message_order) . "\n" .
+          CLICSHOPPING::getDef('email_separator') . "\n";
+          $payment_class = $CLICSHOPPING_PM;
+
+          $email_order .= $payment_class->title . "\n\n";
+
+          if (property_exists(get_class($payment_class),'email_footer')) {
+            $email_order .= $payment_class->email_footer;
+          }
         }
       }
 
@@ -1048,8 +1058,8 @@
         $email_text_subject = html_entity_decode($email_text_subject);
         $text[] = TemplateEmail::getExtractEmailAddress(SEND_EXTRA_ORDER_EMAILS_TO);
 
-        foreach($text as $key => $email){
-          $this->mail->clicMail('', $email[$key], $email_text_subject, $email_order, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+        foreach($text as $key => $email) {
+          $CLICSHOPPING_Mail->clicMail('', $email[$key], $email_text_subject, $email_order, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
         }
       }
 // load the after_process public function from the payment modules
