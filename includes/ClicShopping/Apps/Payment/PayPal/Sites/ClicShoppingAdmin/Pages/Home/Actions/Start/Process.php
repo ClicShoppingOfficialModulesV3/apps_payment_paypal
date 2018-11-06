@@ -27,7 +27,7 @@
           $params = [
               'return_url' => $CLICSHOPPING_PayPal->link('Start&Retrieve'),
               'type' => $_GET['type'],
-              'site_url' => CLICSHOPPING::link('Shop/index.php', null, false),
+              'site_url' => CLICSHOPPING::link('Shop/CLICSHOPPING::link(null, null, false),
               'site_currency' => DEFAULT_CURRENCY
           ];
 
