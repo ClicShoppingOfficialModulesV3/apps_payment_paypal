@@ -27,8 +27,8 @@ class PayflowSetExpressCheckout extends \ClicShopping\Apps\Payment\PayPal\APIAbs
                   'TENDER' => 'P',
                   'TRXTYPE' => (CLICSHOPPING_APP_PAYPAL_DP_TRANSACTION_METHOD == '1') ? 'S' : 'A',
                   'ACTION' => 'S',
-                  'RETURNURL' => CLICSHOPPING::link('CLICSHOPPING::link(null, 'order&callback&paypal&ec&action=retrieve', false, false),
-                  'CANCELURL' => CLICSHOPPING::link('CLICSHOPPING::link(null, 'Cart')
+                  'RETURNURL' => CLICSHOPPING::link(null, 'order&callback&paypal&ec&action=retrieve', false, false),
+                  'CANCELURL' => CLICSHOPPING::link(null, 'Cart')
                   ];
 
         if (!empty($extra_params)) {

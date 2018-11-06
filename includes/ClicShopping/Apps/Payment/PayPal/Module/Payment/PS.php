@@ -454,10 +454,10 @@
                     'invoice' => substr($_SESSION['cart_PayPal_Standard_ID'], strpos($_SESSION['cart_PayPal_Standard_ID'], '-')+1),
                     'custom' => $CLICSHOPPING_Customer->getID(),
                     'no_note' => '1',
-                    'notify_url' => CLICSHOPPING::link('CLICSHOPPING::link(null, 'order&ipn&paypal&ps&language=' . $this->lang->get('code'), false, false),
+                    'notify_url' => CLICSHOPPING::link(null, 'order&ipn&paypal&ps&language=' . $this->lang->get('code'), false, false),
                     'rm' => '2',
-                    'return' => CLICSHOPPING::link('CLICSHOPPING::link(null, 'Checkout&Process'),
-                    'cancel_return' => CLICSHOPPING::link('CLICSHOPPING::link(null, 'Checkout&Billing'),
+                    'return' => CLICSHOPPING::link(null, 'Checkout&Process'),
+                    'cancel_return' => CLICSHOPPING::link(null, 'Checkout&Billing'),
                     'bn' => $this->app->getIdentifier(),
                     'paymentaction' => (CLICSHOPPING_APP_PAYPAL_PS_TRANSACTION_METHOD == '1') ? 'sale' : 'authorization'
                     ];
@@ -986,7 +986,7 @@
       $email_order = STORE_NAME . "\n\n" .
       CLICSHOPPING::getDef('email_separator') .  "\n" .
       CLICSHOPPING::getDef('email_text_order_number', ['store_name' => STORE_NAME]) . ' ' . $this->order_id . "\n" .
-      CLICSHOPPING::getDef('email_text_invoice_url') . ' ' . CLICSHOPPING::link('CLICSHOPPING::link(null, 'Account&HistoryInfo&order_id=' . (int)$this->order_id) . "\n" .
+      CLICSHOPPING::getDef('email_text_invoice_url') . ' ' . CLICSHOPPING::link(null, 'Account&HistoryInfo&order_id=' . (int)$this->order_id) . "\n" .
       CLICSHOPPING::getDef('email_text_date_ordered') . ' ' . strftime(CLICSHOPPING::getDef('date_format_long')) . "\n\n";
 
       if ($CLICSHOPPING_Order->info['comments']) {
