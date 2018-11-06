@@ -738,7 +738,7 @@
       if ( $result != 'VERIFIED' ) {
         $CLICSHOPPING_MessageStack->add('header', $this->app->getDef('module_ps_error_invalid_transaction'));
 
-        CLICSHOPPING::redirect('CLICSHOPPING::link(null, 'Cart');
+        CLICSHOPPING::redirect(null, 'Cart');
       }
 
       $this->verifyTransaction($pptx_params);
@@ -751,7 +751,7 @@
                                );
 
       if (($Qorder->fetch() === false) || ($this->order_id != $pptx_params['invoice']) || ($CLICSHOPPING_Customer->getID() != $pptx_params['custom'])) {
-        CLICSHOPPING::redirect('CLICSHOPPING::link(null, 'Cart');
+        CLICSHOPPING::redirect(null, 'Cart');
       }
 
 
@@ -1087,7 +1087,7 @@
 
       unset($_SESSION['cart_PayPal_Standard_ID']);
 
-      CLICSHOPPING::redirect('CLICSHOPPING::link(null, 'Checkout&Success');
+      CLICSHOPPING::redirect(null, 'Checkout&Success');
     }
 
     public function get_error() {
