@@ -4,7 +4,7 @@
  *  @copyright 2008 - https://www.clicshopping.org
  *  @Brand : ClicShopping(Tm) at Inpi all right Reserved
  *  @Licence GPL 2 & MIT
- *  @licence MIT - Portion of osCommerce 2.4 
+ *  @licence MIT - Portion of osCommerce 2.4
  *
  *
  */
@@ -27,7 +27,7 @@
           $params = [
               'return_url' => $CLICSHOPPING_PayPal->link('Start&Retrieve'),
               'type' => $_GET['type'],
-              'site_url' => CLICSHOPPING::link('Shop/CLICSHOPPING::link(null, null, false),
+              'site_url' => CLICSHOPPING::link('Shop/index.php', null, false),
               'site_currency' => DEFAULT_CURRENCY
           ];
 
