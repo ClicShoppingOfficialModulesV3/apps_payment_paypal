@@ -94,7 +94,7 @@
                 break;
             }
 
-            CLICSHOPPING::redirect(null, 'A&Orders\Orders&Edit&oID=' . $_GET['oID'] . '&page=' . $_GET['page'] . '#section_status_history_content');
+            CLICSHOPPING::redirect(null, 'A&Orders\Orders&Edit&oID=' . $_GET['oID'] . '&page=' . (int)$_GET['page'] . '#section_status_history_content');
           }
         }
       }
