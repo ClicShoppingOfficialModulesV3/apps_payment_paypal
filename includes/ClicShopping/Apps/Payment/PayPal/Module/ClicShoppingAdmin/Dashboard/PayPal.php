@@ -19,6 +19,7 @@
   class PayPal extends \ClicShopping\OM\Modules\AdminDashboardAbstract
   {
     protected $app;
+    public $group;
 
     protected function init()
     {
@@ -168,7 +169,7 @@ $(function() {
   (function() {
     var pass = false;
 
-    if ( CLICSHOPPING.APP.PAYPAL.accountTypes['live'] == true ) {
+    if ( CLICSHOPPING.APP.PAYPAL.accountTypes['live'] === true ) {
       pass = true;
 
       $('#ppAccountBalanceSandbox').hide();
@@ -177,7 +178,7 @@ $(function() {
     } else {
       $('#ppAccountBalanceLive').hide();
 
-      if ( CLICSHOPPING.APP.PAYPAL.accountTypes['sandbox'] == true ) {
+      if ( CLICSHOPPING.APP.PAYPAL.accountTypes['sandbox'] === true ) {
         pass = true;
 
         CLICSHOPPING.APP.PAYPAL.getBalance('sandbox');

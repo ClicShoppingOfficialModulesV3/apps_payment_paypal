@@ -26,12 +26,16 @@
 
   class PS implements \ClicShopping\OM\Modules\PaymentInterface
   {
-
     public $code;
     public $title;
     public $description;
-    public $enabled;
+    public $enabled = false;
     public $app;
+    public $signature;
+    public $public_title;
+    public $sort_order = 0;
+    protected $api_version;
+    public $group;
 
     protected $lang;
 

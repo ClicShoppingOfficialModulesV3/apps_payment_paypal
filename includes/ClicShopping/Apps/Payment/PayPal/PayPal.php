@@ -47,7 +47,7 @@
 
       if (is_array($request)) {
         foreach ($request as $key => $value) {
-          if ((strpos($key, '_nh-dns') !== false) || in_array($key, $filter)) {
+          if ((str_contains($key, '_nh-dns')) || in_array($key, $filter)) {
             $value = '**********';
           }
 
