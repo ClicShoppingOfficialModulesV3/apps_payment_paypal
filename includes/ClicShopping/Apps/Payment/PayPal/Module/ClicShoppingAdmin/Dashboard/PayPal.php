@@ -79,7 +79,7 @@ var CLICSHOPPING = {
 
 <div id="ppAccountBalanceLive" class="panel panel-success">
   <div class="panel-heading">
-    <h3 class="panel-title">{$heading_live_account} <span class="small float-md-right">{$cached_notice}</span></h3>
+    <h3 class="panel-title">{$heading_live_account} <span class="small float-end">{$cached_notice}</span></h3>
   </div>
 
   <div id="ppBalanceLiveInfo" class="panel-body">
@@ -89,7 +89,7 @@ var CLICSHOPPING = {
 
 <div id="ppAccountBalanceSandbox" class="panel panel-warning">
   <div class="panel-heading">
-    <h3 class="panel-title">{$heading_sandbox_account} <span class="small float-md-right">{$cached_notice}</span></h3>
+    <h3 class="panel-title">{$heading_sandbox_account} <span class="small float-end">{$cached_notice}</span></h3>
   </div>
 
   <div id="ppBalanceSandboxInfo" class="panel-body">
