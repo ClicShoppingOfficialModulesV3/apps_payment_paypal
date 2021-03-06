@@ -34,7 +34,7 @@
     {
       $oID = HTML::sanitize($_GET['oID']);
 
-      if (!defined('CLICSHOPPING_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID')) {
+      if (!\defined('CLICSHOPPING_APP_PAYPAL_TRANSACTIONS_ORDER_STATUS_ID')) {
         return false;
       }
 

@@ -111,7 +111,7 @@
           'TRANSACTIONID' => $comments['Transaction ID']
         ], (strpos($order['payment_method'], 'Sandbox') === false) ? 'live' : 'sandbox');
 
-        if (in_array($response['ACK'], ['Success', 'SuccessWithWarning'])) {
+        if (\in_array($response['ACK'], ['Success', 'SuccessWithWarning'])) {
           $result = 'Transaction ID: ' . HTML::sanitize($response['TRANSACTIONID']) . "\n" .
             'Payer Status: ' . HTML::sanitize($response['PAYERSTATUS']) . "\n" .
             'Address Status: ' . HTML::sanitize($response['ADDRESSSTATUS']) . "\n" .
@@ -245,7 +245,7 @@
 
         $response = $this->app->getApiResult('APP', 'DoCapture', $params, (strpos($order['payment_method'], 'Sandbox') === false) ? 'live' : 'sandbox');
 
-        if (in_array($response['ACK'], ['Success', 'SuccessWithWarning'])) {
+        if (\in_array($response['ACK'], ['Success', 'SuccessWithWarning'])) {
           $transaction_id = $response['TRANSACTIONID'];
 
           $pass = true;
@@ -304,7 +304,7 @@
           'AUTHORIZATIONID' => $comments['Transaction ID']
         ], (strpos($order['payment_method'], 'Sandbox') === false) ? 'live' : 'sandbox');
 
-        if (in_array($response['ACK'], ['Success', 'SuccessWithWarning'])) {
+        if (\in_array($response['ACK'], ['Success', 'SuccessWithWarning'])) {
           $pass = true;
         }
       } elseif ($comments['Gateway'] == 'Payflow') {
@@ -408,7 +408,7 @@
               'TRANSACTIONID' => $id
             ], (strpos($order['payment_method'], 'Sandbox') === false) ? 'live' : 'sandbox');
 
-            if (in_array($response['ACK'], ['Success', 'SuccessWithWarning'])) {
+            if (\in_array($response['ACK'], ['Success', 'SuccessWithWarning'])) {
               $transaction_id = $response['REFUNDTRANSACTIONID'];
 
               $pass = true;
