@@ -1,0 +1,32 @@
+
+app_link_info = Info/Aide
+app_link_privacy = Confidentialité
+
+onboarding_intro_body = <p>Start selling and earning faster with your PayPal API credentials.</p>
+
+<p>Les comptes PayPal en Live sont destinés aux boutiques en direct prêtes à accepter les paiements.
+Sandbox Les comptes PayPal sont utilisés à des fins de test où les commandes sont traitées, mais aucun paiement réel n'est effectué.
+</p>
+
+manage_credentials_title = Manage API Credentials
+
+manage_credentials_body = <p>Entrez vos identifiants de l'API PayPal et commencez à vendre avec PayPal.</p>
+<p>{{button_manage_credentials}}</p>
+
+button_manage_credentials = Manage Your API Credentials
+
+alert_onboarding_currently_unavailable_error = La procédure pour récupérer les informations d'identification du compte PayPal n'est actuellement pas en service. Veuillez réessayer dans un court instant ou entrez vos identifiants manuellement.
+alert_onboarding_initialization_error = Could not initiate the procedure to retrieve the PayPal account credentials. Please try again in a short while or enter your credentials in manually.
+alert_onboarding_connection_error = Could not connect to the ClicShopping website to initiate the procedure to retrieve the PayPal account credentials. Please try again in a short while or enter your credentials in manually.
+alert_onboarding_account_type_error = Veuillez sélectionner pour récupérer les informations d'identification du compte PayPal Live ou sandbox et réessayer ou entrer vos informations d'identification manuellement.
+alert_onboarding_retrieve_error = Could not retrieve the PayPal account credentials. Please try again in a short while or enter your credentials in manually.
+alert_onboarding_retrieve_connection_error = Impossible de se connecter au site Web ClicShopping pour récupérer les informations d'identification du compte PayPal. Veuillez réessayer dans un court instant ou entrez vos identifiants manuellement.
+
+alert_onboarding_success = PayPal account credentials have been successfully configured.
+
+button_balance = Balance
+button_configure = Configurer / Installer
+button_credential = Credential
+button_log = Log
+button_delete_menu = Supprimer menu
+button_sort_order = Payal ordre de tri

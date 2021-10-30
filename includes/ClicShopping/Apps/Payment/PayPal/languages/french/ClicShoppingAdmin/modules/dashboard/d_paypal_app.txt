@@ -1,0 +1,9 @@
+module_admin_dashboard_title = PayPal App
+module_admin_dashboard_description = Module PayPal App Dashboard pour afficher le solde PayPal et les nouvelles notifications de mise à jour de la version de l'application.
+
+heading_live_account = PayPal Live: {{account}}
+heading_sandbox_account = PayPal Sandbox: {{account}}
+
+cached_notice = (cached 15 mins.)
+
+button_app_get_started = Démarrez avec l'appli PayPal

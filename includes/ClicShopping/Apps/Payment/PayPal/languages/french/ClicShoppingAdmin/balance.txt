@@ -1,0 +1,17 @@
+heading_live_account = Live: {{account}}
+heading_sandbox_account = Sandbox: {{account}}
+
+retrieving_balance_progress = Récupération balance &hellip;
+
+error_no_accounts_configured = Erreur: aucun compte PayPal Live ou sandbox n'a encore été configuré. Veuillez configurer un compte PayPal et réessayer.
+error_balance_retrieval = Erreur: le solde PayPal n'a pas pu être récupéré. Veuillez réessayer.
+
+button_balance = Balance
+button_configure = Configurer / Installer
+button_credential = Credential
+button_log = Log
+button_delete_menu = Supprimer menu
+button_sort_order = Payal ordre de tri
+
+app_link_info = Info/Aide
+app_link_privacy = Confidentialité

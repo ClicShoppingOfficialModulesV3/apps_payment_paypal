@@ -19,7 +19,7 @@
 
   class Action implements \ClicShopping\OM\Modules\HooksInterface
   {
-    protected $app;
+    protected mixed $app;
     protected $ms;
 
     public function __construct()

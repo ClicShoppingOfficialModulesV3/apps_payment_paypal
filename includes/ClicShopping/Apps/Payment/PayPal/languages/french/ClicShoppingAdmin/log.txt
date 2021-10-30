@@ -1,0 +1,32 @@
+table_heading_action = Action
+table_heading_ip = IP
+table_heading_customer = Client
+table_heading_date = Date
+
+guest = Invité
+
+no_entries = No log entries found.
+
+listing_number_of_log_entries = Displaying <strong>{{listing_from}}</strong> to <strong>{{listing_to}}</strong> (of <strong>{{listing_total}}</strong> entries)
+
+dialog_delete_title = Supprimer toutes les entrées de journal?
+dialog_delete_body = Are you sure you want to delete all log entries?
+
+table_heading_entries_request = Request
+table_heading_entries_response = Response
+
+alert_delete_success = Les entrées de journal ont été supprimées avec succès.
+
+button_balance = Balance
+button_configure = Configurer / Installer
+button_credential = Credential
+button_log = Log
+button_dialog_delete = Supprimer
+button_back = Retour
+button_delete = Supprimer
+button_cancel = Annuler
+button_delete_menu = Supprimer menu
+button_sort_order = Payal ordre de tri
+
+app_link_info = Info/Aide
+app_link_privacy = Confidentialité

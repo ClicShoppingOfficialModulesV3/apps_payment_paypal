@@ -1,0 +1,11 @@
+ms_success_getTransactionDetails = Les détails de la transaction PayPal ont été récupérés avec succès.
+ms_error_getTransactionDetails = Un problème s'est produit lors de la récupération des détails de la transaction PayPal. Veuillez consulter le journal des applications PayPal pour plus d'informations.
+
+ms_success_doCapture = La transaction PayPal a été correctement capturée.
+ms_error_doCapture = Un problème s'est produit lors de la capture de la transaction PayPal. Veuillez consulter le journal des applications PayPal pour plus d'informations.
+
+ms_success_doVoid = The PayPal transaction has been successfully cancelled.
+ms_error_doVoid = Un problème s'est produit lors de l'annulation de la transaction PayPal. Veuillez consulter le journal des applications PayPal pour plus d'informations.
+
+ms_success_refundTransaction = La transaction PayPal a été remboursée avec succès ({{refund_amount}}).
+ms_error_refundTransaction = Un problème s'est produit lors du remboursement de la transaction PayPal ({{refund_amount}}). Veuillez consulter le journal des applications PayPal pour plus d'informations.

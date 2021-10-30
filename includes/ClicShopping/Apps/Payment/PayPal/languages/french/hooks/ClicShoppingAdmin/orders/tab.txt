@@ -1,0 +1,25 @@
+button_dialog_capture = Capturer &hellip;
+button_details = Details
+button_dialog_refund = Rembourser &hellip;
+button_view_at_paypal = View at PayPal
+button_dialog_void = Void &hellip;
+
+tab_title = PayPal
+
+dialog_capture_title = Capture paiement
+dialog_capture_body = le montant total ou paritel peut etre capturer.
+dialog_capture_amount_field_title = Montant:
+dialog_capture_last_capture_field_title = C'est la dernière capture (release <span id="ppCaptureVoidedValue"></span> {{currency}} back to the customer).
+dialog_capture_button_capture = Montant capturer
+dialog_capture_button_cancel = Annuler
+
+dialog_void_title = Void paiement
+dialog_void_body = Etes vous surque vous souhaitez annuler le paiement autorisé ?
+dialog_void_button_void = Void paiement
+dialog_void_button_cancel = Annuler
+
+dialog_refund_title = Rembourser paiement
+dialog_refund_body = Please select which refunds to perform:
+dialog_refund_payment_title = Rembourser {{amount}} au client.
+dialog_refund_button_refund = Rembourser paiement
+dialog_refund_button_cancel = Annuler
