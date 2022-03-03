@@ -62,7 +62,7 @@
       $this->code = 'PS';
       $this->title = $this->app->getDef('module_ps_title');
       $this->public_title = $this->app->getDef('module_ps_public_title');
-      $this->description = '<div class="text-md-center">' . HTML::button($this->app->getDef('module_ps_legacy_admin_app_button'), null, $this->app->link('Configure&module=PS'), 'primary') . '</div>';
+      $this->description = '<div class="text-center">' . HTML::button($this->app->getDef('module_ps_legacy_admin_app_button'), null, $this->app->link('Configure&module=PS'), 'primary') . '</div>';
 
 // Activation module du paiement selon les groupes B2B
 
@@ -225,7 +225,7 @@
 
           $Qorder = $this->app->db->get('orders', 'currency', ['orders_id' => (int)$this->order_id]);
 
-          if (($Qorder->value('currency') != $CLICSHOPPING_Order->info['currency']) || ($_SESSION['cartID'] != substr($_SESSION['cart_PayPal_Standard_ID'], 0, strlen($_SESSION['cartID'])))) {
+          if (($Qorder->value('currency') != $CLICSHOPPING_Order->info['currency']) || ($_SESSION['cartID'] != substr($_SESSION['cart_PayPal_Standard_ID'], 0, \strlen($_SESSION['cartID'])))) {
 
             $Qcheck = $this->app->db->get('orders_status_history', 'orders_id', ['orders_id' => (int)$this->order_id],
               null,
@@ -475,7 +475,7 @@
 
       $return_link_title = $this->app->getDef('module_ps_button_return_to_store', ['store_name' => STORE_NAME]);
 
-      if (strlen($return_link_title) <= 60) {
+      if (\strlen($return_link_title) <= 60) {
         $parameters['cbt'] = $return_link_title;
       }
 
@@ -638,7 +638,7 @@
         }
       }
 
-      $process_button_string .= '<div class="text-md-right">' . HTML::button($this->app->getDef('text_button_paypal'), null, null, 'primary',  ['type' => 'submit', 'params' => 'onclick="submitButtonClick(event)" data-button="payNow"']) . '</div>';
+      $process_button_string .= '<div class="text-end">' . HTML::button($this->app->getDef('text_button_paypal'), null, null, 'primary',  ['type' => 'submit', 'params' => 'onclick="submitButtonClick(event)" data-button="payNow"']) . '</div>';
 
       return $process_button_string;
     }
@@ -925,7 +925,7 @@
                   $reorder_stock_email = html_entity_decode($reorder_stock_email);
                   $reorder_stock_email .= "\n" . CLICSHOPPING::getDef('module_payment_paypal_standard_text_date_alert') . ' ' . strftime(CLICSHOPPING::getDef('date_format_long')) . "\n" . CLICSHOPPING::getDef('email_text_model') . ' ' . $CLICSHOPPING_Order->products[$i]['model'] . "\n" . CLICSHOPPING::getDef('email_text_products_name') . $CLICSHOPPING_Order->products[$i]['name'] . "\n" . CLICSHOPPING::getDef('email_text_products_id') . ' ' . $CLICSHOPPING_Prod::getProductID($CLICSHOPPING_Order->products[$i]['id']) . "\n" . '<strong>' . CLICSHOPPING::getDef('email_text_products_url') . '</strong>' . HTTP::getShopUrlDomain() . 'index.php?Products&Description&products_id=' . $CLICSHOPPING_Order->products[$i]['id'] . "\n" . '<strong>' . CLICSHOPPING::getDef('email_text_products_alert_stock') . ' ' . $stock_products_quantity_alert . '</strong>';
 
-                  $CLICSHOPPING_Mail->clicMail(STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS, $email_text_subject_stock, $reorder_stock_email, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+                  $CLICSHOPPING_Mail->clicMail(STORE_OWNER_EMAIL_ADDRESS, STORE_OWNER, $email_text_subject_stock, $reorder_stock_email, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
                 }
 
                 if ($current_stock <= $warning_stock) {
@@ -936,7 +936,7 @@
                   $reorder_stock_email = html_entity_decode($reorder_stock_email);
                   $reorder_stock_email .= "\n" . CLICSHOPPING::getDef('module_payment_paypal_standard_text_date_alert') . ' ' . strftime(CLICSHOPPING::getDef('date_format_long')) . "\n" . CLICSHOPPING::getDef('email_text_model') . ' ' . $CLICSHOPPING_Order->products[$i]['model'] . "\n" . CLICSHOPPING::getDef('email_text_products_name') . $CLICSHOPPING_Order->products[$i]['name'] . "\n" . CLICSHOPPING::getDef('email_text_products_id') . ' ' . $CLICSHOPPING_Prod::getProductID($CLICSHOPPING_Order->products[$i]['id']) . "\n" . '<strong>' . CLICSHOPPING::getDef('email_text_products_url') . '</strong>' . HTTP::getShopUrlDomain() . 'index.php?Products&Description&products_id=' . $CLICSHOPPING_Order->products[$i]['id'] . "\n" . '<strong>' . CLICSHOPPING::getDef('email_text_products_alert_stock') . ' ' . $current_stock . '</strong>';
 
-                  $CLICSHOPPING_Mail->clicMail(STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS, $email_text_subject_stock, $reorder_stock_email, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+                  $CLICSHOPPING_Mail->clicMail(STORE_OWNER_EMAIL_ADDRESS, STORE_OWNER, $email_text_subject_stock, $reorder_stock_email, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
                 }
               }
             }
@@ -964,7 +964,7 @@
                 $email_product_sold_out_stock = html_entity_decode($email_product_sold_out_stock);
                 $email_product_sold_out_stock .= "\n" . CLICSHOPPING::getDef('module_payment_paypal_standard_text_date_alert') . ' ' . strftime(CLICSHOPPING::getDef('date_format_long')) . "\n" . CLICSHOPPING::getDef('email_text_model') . ' ' . $CLICSHOPPING_Order->products[$i]['model'] . "\n" . CLICSHOPPING::getDef('email_text_products_name') . $CLICSHOPPING_Order->products[$i]['name'] . "\n" . CLICSHOPPING::getDef('email_text_products_id') . ' ' . $CLICSHOPPING_Prod::getProductID($CLICSHOPPING_Order->products[$i]['id']) . "\n";
 
-                $CLICSHOPPING_Mail->clicMail(STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS, $email_text_subject_stock, $email_product_sold_out_stock, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+                $CLICSHOPPING_Mail->clicMail(STORE_OWNER_EMAIL_ADDRESS, STORE_OWNER, $email_text_subject_stock, $email_product_sold_out_stock, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
               }
             } // end stock alert
           }
@@ -1063,7 +1063,7 @@
       $email_order .= TemplateEmail::getTemplateEmailSignature() . "\n\n";
       $email_order .= TemplateEmail::getTemplateEmailTextFooter() . "\n\n";
 
-      $CLICSHOPPING_Mail->clicMail($CLICSHOPPING_Order->customer['lastname'], $CLICSHOPPING_Order->customer['email_address'], CLICSHOPPING::getDef('email_text_subject', ['store_name' => STORE_NAME]), $email_order, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+      $CLICSHOPPING_Mail->clicMail($CLICSHOPPING_Order->customer['email_address'], $CLICSHOPPING_Order->customer['lastname'], CLICSHOPPING::getDef('email_text_subject', ['store_name' => STORE_NAME]), $email_order, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
 
 // send emails to other people
 // SEND_EXTRA_ORDER_EMAILS_TO does'nt work like this, test<test@test.com>, just with test@test.com
@@ -1073,7 +1073,7 @@
         $text[] = TemplateEmail::getExtractEmailAddress(SEND_EXTRA_ORDER_EMAILS_TO);
 
         foreach ($text as $key => $email) {
-          $CLICSHOPPING_Mail->clicMail('', $email[$key], $email_text_subject, $email_order, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
+          $CLICSHOPPING_Mail->clicMail($email[$key], null, $email_text_subject, $email_order, STORE_OWNER, STORE_OWNER_EMAIL_ADDRESS);
         }
       }
 

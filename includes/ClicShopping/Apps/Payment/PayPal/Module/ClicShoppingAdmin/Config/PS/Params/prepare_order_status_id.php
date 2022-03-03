@@ -17,7 +17,7 @@
   class prepare_order_status_id extends \ClicShopping\Apps\Payment\PayPal\Module\ClicShoppingAdmin\Config\ConfigParamAbstract
   {
     public $default = '0';
-    public $sort_order = 400;
+    public ?int $sort_order = 400;
 
     protected function init()
     {
@@ -26,7 +26,7 @@
       $this->title = $this->app->getDef('cfg_ps_prepare_order_status_id_title');
       $this->description = $this->app->getDef('cfg_ps_prepare_order_status_id_desc');
 
-      if (!\defined('CLICSHOPPING_APP_PAYPAL_PS_PREPARE_ORDER_STATUS_ID') || (strlen(CLICSHOPPING_APP_PAYPAL_PS_PREPARE_ORDER_STATUS_ID) < 1)) {
+      if (!\defined('CLICSHOPPING_APP_PAYPAL_PS_PREPARE_ORDER_STATUS_ID') || (\strlen(CLICSHOPPING_APP_PAYPAL_PS_PREPARE_ORDER_STATUS_ID) < 1)) {
         $Qcheck = $this->app->db->get('orders_status', 'orders_status_id', ['orders_status_name' => 'Preparing [PayPal Standard]'], null, 1);
 
         if ($Qcheck->fetch() === false) {
