@@ -54,7 +54,7 @@
           $pp = [];
 
           foreach (explode("\n", $Qstatus->value('comments')) as $s) {
-            if (!empty($s) && (strpos($s, ':') !== false)) {
+            if (!empty($s) && (str_contains($s, ':'))) {
               $entry = explode(':', $s, 2);
 
               $pp[trim($entry[0])] = trim($entry[1]);
@@ -109,7 +109,7 @@
       if (!isset($comments['Gateway'])) {
         $response = $this->app->getApiResult('APP', 'GetTransactionDetails', [
           'TRANSACTIONID' => $comments['Transaction ID']
-        ], (strpos($order['payment_method'], 'Sandbox') === false) ? 'live' : 'sandbox');
+        ], (!str_contains($order['payment_method'], 'Sandbox')) ? 'live' : 'sandbox');
 
         if (\in_array($response['ACK'], ['Success', 'SuccessWithWarning'])) {
           $result = 'Transaction ID: ' . HTML::sanitize($response['TRANSACTIONID']) . "\n" .
@@ -122,7 +122,7 @@
       } elseif ($comments['Gateway'] == 'Payflow') {
         $response = $this->app->getApiResult('APP', 'PayflowInquiry', [
           'ORIGID' => $comments['Transaction ID']
-        ], (strpos($order['payment_method'], 'Sandbox') === false) ? 'live' : 'sandbox');
+        ], (!str_contains($order['payment_method'], 'Sandbox')) ? 'live' : 'sandbox');
 
         if (isset($response['RESULT']) && ($response['RESULT'] == '0')) {
           $result = 'Transaction ID: ' . HTML::sanitize($response['ORIGPNREF']) . "\n" .
@@ -243,7 +243,7 @@
           'COMPLETETYPE' => ($capture_final === true) ? 'Complete' : 'NotComplete'
         ];
 
-        $response = $this->app->getApiResult('APP', 'DoCapture', $params, (strpos($order['payment_method'], 'Sandbox') === false) ? 'live' : 'sandbox');
+        $response = $this->app->getApiResult('APP', 'DoCapture', $params, (!str_contains($order['payment_method'], 'Sandbox')) ? 'live' : 'sandbox');
 
         if (\in_array($response['ACK'], ['Success', 'SuccessWithWarning'])) {
           $transaction_id = $response['TRANSACTIONID'];
@@ -257,7 +257,7 @@
           'CAPTURECOMPLETE' => ($capture_final === true) ? 'Y' : 'N'
         ];
 
-        $response = $this->app->getApiResult('APP', 'PayflowCapture', $params, (strpos($order['payment_method'], 'Sandbox') === false) ? 'live' : 'sandbox');
+        $response = $this->app->getApiResult('APP', 'PayflowCapture', $params, (!str_contains($order['payment_method'], 'Sandbox')) ? 'live' : 'sandbox');
 
         if (isset($response['RESULT']) && ($response['RESULT'] == '0')) {
           $transaction_id = $response['PNREF'];
@@ -302,7 +302,7 @@
       if (!isset($comments['Gateway'])) {
         $response = $this->app->getApiResult('APP', 'DoVoid', [
           'AUTHORIZATIONID' => $comments['Transaction ID']
-        ], (strpos($order['payment_method'], 'Sandbox') === false) ? 'live' : 'sandbox');
+        ], (!str_contains($order['payment_method'], 'Sandbox')) ? 'live' : 'sandbox');
 
         if (\in_array($response['ACK'], ['Success', 'SuccessWithWarning'])) {
           $pass = true;
@@ -310,7 +310,7 @@
       } elseif ($comments['Gateway'] == 'Payflow') {
         $response = $this->app->getApiResult('APP', 'PayflowVoid', [
           'ORIGID' => $comments['Transaction ID']
-        ], (strpos($order['payment_method'], 'Sandbox') === false) ? 'live' : 'sandbox');
+        ], (!str_contains($order['payment_method'], 'Sandbox')) ? 'live' : 'sandbox');
 
         if (isset($response['RESULT']) && ($response['RESULT'] == '0')) {
           $pass = true;
@@ -378,11 +378,11 @@
 
         if ($Qc->fetch() !== false) {
           do {
-            if (strpos($Qc->value('comments'), 'PayPal App: Refund') !== false) {
+            if (str_contains($Qc->value('comments'), 'PayPal App: Refund')) {
               preg_match('/Parent ID\: ([A-Za-z0-9]+)$/', $Qc->value('comments'), $ppr_matches);
 
               $tids[$ppr_matches[1]]['Refund'] = true;
-            } elseif (strpos($Qc->value('comments'), 'PayPal App: Capture') !== false) {
+            } elseif (str_contains($Qc->value('comments'), 'PayPal App: Capture')) {
               preg_match('/^PayPal App\: Capture \(([0-9\.]+)\).*Transaction ID\: ([A-Za-z0-9]+)/s', $Qc->value('comments'), $ppr_matches);
 
               $tids[$ppr_matches[2]]['Amount'] = $ppr_matches[1];
@@ -406,7 +406,7 @@
           if (!isset($comments['Gateway'])) {
             $response = $this->app->getApiResult('APP', 'RefundTransaction', [
               'TRANSACTIONID' => $id
-            ], (strpos($order['payment_method'], 'Sandbox') === false) ? 'live' : 'sandbox');
+            ], (!str_contains($order['payment_method'], 'Sandbox')) ? 'live' : 'sandbox');
 
             if (\in_array($response['ACK'], ['Success', 'SuccessWithWarning'])) {
               $transaction_id = $response['REFUNDTRANSACTIONID'];
@@ -416,7 +416,7 @@
           } elseif ($comments['Gateway'] == 'Payflow') {
             $response = $this->app->getApiResult('APP', 'PayflowRefund', [
               'ORIGID' => $id
-            ], (strpos($order['payment_method'], 'Sandbox') === false) ? 'live' : 'sandbox');
+            ], (!str_contains($order['payment_method'], 'Sandbox')) ? 'live' : 'sandbox');
 
             if (isset($response['RESULT']) && ($response['RESULT'] == '0')) {
               $transaction_id = $response['PNREF'];
