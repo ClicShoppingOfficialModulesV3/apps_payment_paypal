@@ -56,7 +56,7 @@
       $content_width = 'col-lg-' . (int)MODULE_ADMIN_DASHBOARD_PAYPAL_APP_CONTENT_WIDTH;
 
       $output = <<<EOD
-        <span class="$content_width text-md-center">
+        <span class="$content_width text-center">
 <script>
 var CLICSHOPPING = {
   htmlSpecialChars: function(string) {

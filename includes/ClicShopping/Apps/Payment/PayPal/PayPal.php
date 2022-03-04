@@ -19,7 +19,7 @@
   class PayPal extends \ClicShopping\OM\AppAbstract
   {
     protected $api_version = 204;
-    protected $identifier = 'ClicShopping_PPapp_v5';
+    protected string $identifier = 'ClicShopping_PPapp_v5';
 
     protected function init()
     {
@@ -63,7 +63,7 @@
         foreach ($response as $key => $value) {
           if (\is_array($value)) {
             $value = http_build_query($value);
-          } elseif ((strpos($key, '_nh-dns') !== false) || \in_array($key, $filter)) {
+          } elseif ((str_contains($key, '_nh-dns')) || \in_array($key, $filter)) {
             $value = '**********';
           }
 
@@ -110,7 +110,10 @@
       return $migrated;
     }
 
-    public function getConfigModules()
+    /**
+     * @return array|mixed
+     */
+    public function getConfigModules(): mixed
     {
       static $result;
 
@@ -118,40 +121,10 @@
         $result = [];
 
         $directory = CLICSHOPPING::BASE_DIR . 'Apps/Payment/PayPal/Module/ClicShoppingAdmin/Config';
+        $name_space_config = 'ClicShopping\Apps\Payment\PayPal\Module\ClicShoppingAdmin\Config';
+        $trigger_message = 'ClicShopping\Apps\Payment\PayPal\PayPal::getConfigModules(): ';
 
-        if ($dir = new \DirectoryIterator($directory)) {
-          foreach ($dir as $file) {
-            if (!$file->isDot() && $file->isDir() && is_file($file->getPathname() . '/' . $file->getFilename() . '.php')) {
-              $class = 'ClicShopping\Apps\Payment\PayPal\Module\ClicShoppingAdmin\Config\\' . $file->getFilename() . '\\' . $file->getFilename();
-
-              if (is_subclass_of($class, 'ClicShopping\Apps\Payment\PayPal\Module\ClicShoppingAdmin\Config\ConfigAbstract')) {
-                $sort_order = $this->getConfigModuleInfo($file->getFilename(), 'sort_order');
-
-                if ($sort_order > 0) {
-                  $counter = $sort_order;
-                } else {
-                  $counter = \count($result);
-                }
-
-                while (true) {
-                  if (isset($result[$counter])) {
-                    $counter++;
-
-                    continue;
-                  }
-
-                  $result[$counter] = $file->getFilename();
-
-                  break;
-                }
-              } else {
-                trigger_error('ClicShopping\Apps\Payment\PayPal\PayPal::getConfigModules(): ClicShopping\Apps\Payment\PayPal\Module\ClicShoppingAdmin\Config\\' . $file->getFilename() . '\\' . $file->getFilename() . ' is not a subclass of ClicShopping\Apps\Payment\PayPal\Module\ClicShoppingAdmin\Config\ConfigAbstract and cannot be loaded.');
-              }
-            }
-          }
-
-          ksort($result, SORT_NUMERIC);
-        }
+        $this->getConfigApps($result, $directory, $name_space_config, $trigger_message);
       }
 
       return $result;
@@ -186,7 +159,7 @@
       if ($type == 'email') {
         $creds = array('CLICSHOPPING_APP_PAYPAL_' . $server . '_SELLER_EMAIL');
       } elseif (substr($type, 0, 7) == 'payflow') {
-        if (strlen($type) > 7) {
+        if (\strlen($type) > 7) {
           $creds = ['CLICSHOPPING_APP_PAYPAL_PF_' . $server . '_' . strtoupper(substr($type, 8))];
         } else {
           $creds = ['CLICSHOPPING_APP_PAYPAL_PF_' . $server . '_VENDOR',
@@ -201,7 +174,7 @@
       }
 
       foreach ($creds as $c) {
-        if (!\defined($c) || (strlen(trim(\constant($c))) < 1)) {
+        if (!\defined($c) || (\strlen(trim(\constant($c))) < 1)) {
           return false;
         }
       }
@@ -251,7 +224,7 @@
       }
 
       foreach ($creds as $c) {
-        if (!\defined($c) || (strlen(trim(\constant($c))) < 1)) {
+        if (!\defined($c) || (\strlen(trim(\constant($c))) < 1)) {
           return false;
         }
       }
@@ -318,7 +291,10 @@
       return $this->api_version;
     }
 
-    public function getIdentifier()
+     /**
+     * @return string
+     */
+    public function getIdentifier() :String
     {
       return $this->identifier;
     }

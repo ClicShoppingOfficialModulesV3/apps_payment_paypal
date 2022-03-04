@@ -60,7 +60,7 @@
 
       if ($Qc->fetch() !== false) {
         foreach (explode("\n", $Qc->value('comments')) as $s) {
-          if (!empty($s) && (strpos($s, ':') !== false)) {
+          if (!empty($s) && (str_contains($s, ':'))) {
             $entry = explode(':', $s, 2);
 
             $status[trim($entry[0])] = trim($entry[1]);
@@ -82,11 +82,11 @@
           $Qorder->bindInt(':orders_id', $oID);
           $Qorder->bindvalue(':ot_total', 'TO');
           $Qorder->execute();
-          $pp_server = (strpos(strtolower($Qorder->value('payment_method')), 'sandbox') !== false) ? 'sandbox' : 'live';
+          $pp_server = (stripos($Qorder->value('payment_method'), 'sandbox') !== false) ? 'sandbox' : 'live';
 
-          $info_button = HTML::button($this->app->getDef('button_details'), 'fas fa-info-circle', CLICSHOPPING::link(null, 'A&Orders\Orders&Edit&oID=' . $oID . '&tabaction=#getTransactionDetails'), 'primary');
-
-
+           $info_button = HTML::button($this->app->getDef('button_details'), 'bi bi-info-circle-fill', CLICSHOPPING::link(null, 'A&Orders\Orders&Edit&oID=' . $oID . '&tabaction=#getTransactionDetails'), 'primary');
+               
+//	   $info_button = HTML::button($this->app->getDef('button_details'), 'bi bi-info-circle-fill', CLICSHOPPING::link(null, 'A&Orders\Orders&Edit&oID=' . $oID . '&page=' . (int)$_GET['page'] . '&tabaction=#getTransactionDetails'), 'primary');
 
 
 
@@ -107,7 +107,7 @@
 
 <script>
 $('#section_paypalAppPayPal_content').appendTo('#orderTabs .tab-content');
-$('#orderTabs .nav-tabs').append('    <li class="nav-item"><a data-target="#section_paypalAppPayPal_content" role="tab" data-toggle="tab" class="nav-link">{$tab_title}</a></li>');
+$('#orderTabs .nav-tabs').append('    <li class="nav-item"><a data-bs-target="#section_paypalAppPayPal_content" role="tab" data-bs-toggle="tab" class="nav-link">{$tab_title}</a></li>');
 </script>
 EOD;
 
@@ -153,7 +153,7 @@ EOD;
           }
 
           if ($capture_total > 0) {
-            $output .= HTML::button($this->app->getDef('button_dialog_capture'), 'fas fa-check-circle', '#', ['params' => 'data-button="paypalButtonDoCapture"'], 'success');
+            $output .= HTML::button($this->app->getDef('button_dialog_capture'), 'bi bi-check', '#', ['params' => 'data-button="paypalButtonDoCapture"'], 'success');
 
             $dialog_title = HTML::outputProtected($this->app->getDef('dialog_capture_title'));
             $dialog_body = $this->app->getDef('dialog_capture_body');
@@ -161,6 +161,7 @@ EOD;
             $field_last_capture_title = $this->app->getDef('dialog_capture_last_capture_field_title', [
               'currency' => $order['currency']
             ]);
+//                    $capture_link = CLICSHOPPING::link(null, 'A&Orders\Orders&Edit&oID=' . $order['orders_id'] . '&page=' . (int)$_GET['page'] . '&tabaction=doCapture');
             $capture_link = CLICSHOPPING::link(null, 'A&Orders\Orders&Edit&oID=' . $order['orders_id'] . '&tabaction=doCapture');
             $capture_currency = $order['currency'];
             $dialog_button_capture = $this->app->getDef('dialog_capture_button_capture');
@@ -171,7 +172,7 @@ EOD;
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">{$dialog_title}</h4>
       </div>
 
@@ -179,7 +180,7 @@ EOD;
         <form id="ppCaptureForm" action="{$capture_link}" method="post">
           <p>{$dialog_body}</p>
 
-          <div class="form-group">
+          <div>
             <label for="ppCaptureAmount">{$field_amount_title}</label>
 
             <div class="input-group">
@@ -201,7 +202,7 @@ EOD;
 
       <div class="modal-footer">
         <button id="paypal-dialog-capture-button" type="button" class="btn btn-success">{$dialog_button_capture}</button>
-        <button type="button" class="btn btn-warning" data-dismiss="modal">{$dialog_button_cancel}</button>
+        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">{$dialog_button_cancel}</button>
       </div>
     </div>
   </div>
@@ -282,11 +283,13 @@ EOD;
           }
 
           if ($capture_total > 0) {
-            $output .= HTML::button($this->app->getDef('button_dialog_void'), 'fas fa-times-circle', '#', ['params' => 'data-button="paypalButtonDoVoid"'], 'warning');
+            $output .= HTML::button($this->app->getDef('button_dialog_void'), 'bi bi-arrow-repeat', '#', ['params' => 'data-button="paypalButtonDoVoid"'], 'warning');
 
             $dialog_title = HTML::outputProtected($this->app->getDef('dialog_void_title'));
             $dialog_body = $this->app->getDef('dialog_void_body');
             $void_link = CLICSHOPPING::link(null, 'A&Orders\Orders&Edit&oID=' . $order['orders_id'] . '&tabaction=doVoid');
+//            $void_link = CLICSHOPPING::link(null, 'A&Orders\Orders&Edit&oID=' . $order['orders_id'] .'&page=' . (int)$_GET['page'] . '&tabaction=doVoid');
+	    
             $dialog_button_void = $this->app->getDef('dialog_void_button_void');
             $dialog_button_cancel = $this->app->getDef('dialog_void_button_cancel');
 
@@ -295,7 +298,7 @@ EOD;
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">{$dialog_title}</h4>
       </div>
 
@@ -305,7 +308,7 @@ EOD;
 
       <div class="modal-footer">
         <button id="paypal-dialog-void-button" type="button" class="btn btn-success">{$dialog_button_void}</button>
-        <button type="button" class="btn btn-warning" data-dismiss="modal">{$dialog_button_cancel}</button>
+        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">{$dialog_button_cancel}</button>
       </div>
     </div>
   </div>
@@ -351,11 +354,11 @@ EOD;
 
       if ($Qc->fetch() !== false) {
         do {
-          if (strpos($Qc->value('comments'), 'PayPal App: Refund') !== false) {
+          if (str_contains($Qc->value('comments'), 'PayPal App: Refund')) {
             preg_match('/Parent ID\: ([A-Za-z0-9]+)$/', $Qc->value('comments'), $ppr_matches);
 
             $tids[$ppr_matches[1]]['Refund'] = true;
-          } elseif (strpos($Qc->value('comments'), 'PayPal App: Capture') !== false) {
+          } elseif (str_contains($Qc->value('comments'), 'PayPal App: Capture')) {
             preg_match('/^PayPal App\: Capture \(([0-9\.]+)\).*Transaction ID\: ([A-Za-z0-9]+)/s', $Qc->value('comments'), $ppr_matches);
 
             $tids[$ppr_matches[2]]['Amount'] = $ppr_matches[1];
@@ -375,11 +378,13 @@ EOD;
       }
 
       if ($can_refund === true) {
-        $output .= HTML::button($this->app->getDef('button_dialog_refund'), 'fas fa-minus-circle', '#', ['params' => 'data-button="paypalButtonRefundTransaction"'], 'danger');
+        $output .= HTML::button($this->app->getDef('button_dialog_refund'), 'bi-dash-circle-fill', '#', ['params' => 'data-button="paypalButtonRefundTransaction"'], 'danger');
 
         $dialog_title = HTML::outputProtected($this->app->getDef('dialog_refund_title'));
         $dialog_body = $this->app->getDef('dialog_refund_body');
         $refund_link = CLICSHOPPING::link(null, 'A&Orders\Orders&Edit&oID=' . $_GET['oID'] . '&tabaction=refundTransaction');
+//        $refund_link = CLICSHOPPING::link(null, 'A&Orders\Orders&Edit&oID=' . $_GET['oID'] . '&page=' . (int)$_GET['page'] . '&tabaction=refundTransaction');
+	
         $dialog_button_refund = $this->app->getDef('dialog_refund_button_refund');
         $dialog_button_cancel = $this->app->getDef('dialog_refund_button_cancel');
 
@@ -400,7 +405,7 @@ EOD;
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">{$dialog_title}</h4>
       </div>
 
@@ -414,7 +419,7 @@ EOD;
 
       <div class="modal-footer">
         <button id="paypal-dialog-refund-button" type="button" class="btn btn-danger">{$dialog_button_refund}</button>
-        <button type="button" class="btn btn-warning" data-dismiss="modal">{$dialog_button_cancel}</button>
+        <button type="button" class="btn btn-warning" data-bs-dismiss="modal">{$dialog_button_cancel}</button>
       </div>
     </div>
   </div>
